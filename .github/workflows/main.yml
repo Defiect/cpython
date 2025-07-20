@@ -12,9 +12,9 @@ jobs:
         github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
         repository: Defiect/cpython
         run-id: 16395215160
-        path: /
+        path: /home/
     - name: Display structure of downloaded files
-      run: ls -R /
+      run: ls -R /home/
     
     - name: release
       uses: actions/create-release@v1
@@ -23,7 +23,7 @@ jobs:
         draft: false
         prerelease: false
         release_name: ${{ steps.version.outputs.version }}
-        tag_name: asdff11g
+        tag_name: asdff11g33
       env:
         GITHUB_TOKEN: ${{ secrets.GH_PAT }}
     
@@ -33,6 +33,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_PAT }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: /
-        asset_name: /*.zip
+        asset_path: /home/
+        asset_name: /home/*.zip
         asset_content_type: application/zip
