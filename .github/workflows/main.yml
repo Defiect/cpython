@@ -12,9 +12,9 @@ jobs:
         github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
         repository: Defiect/cpython
         run-id: 16395215160
-        path: path/to/artifacts
+        path: ./
     - name: Display structure of downloaded files
-      run: ls -R path/to/artifacts
+      run: ls -R ./
     
     - name: release
       uses: actions/create-release@v1
@@ -33,6 +33,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_PAT }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./bin/azblogfilter.windows-amd64.zip
-        asset_name: azblogfilter.windows-amd64.zip
+        asset_path: ./
+        asset_name: ./*.zip
         asset_content_type: application/zip
