@@ -12,3 +12,28 @@ jobs:
         github-token: ${{ secrets.GH_PAT }} # token with actions:read permissions on target repo
         repository: Defiect/cpython
         run-id: 16395215160
+        path: path/to/artifacts
+    - name: Display structure of downloaded files
+      run: ls -R path/to/artifacts
+    
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+    
+    - name: upload windows artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./bin/azblogfilter.windows-amd64.zip
+        asset_name: azblogfilter.windows-amd64.zip
+        asset_content_type: application/zip
