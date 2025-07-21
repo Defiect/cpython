@@ -11,6 +11,7 @@ set BUILDTEST=
 set BUILDPACK=
 set REBUILD=
 
+
 :CheckOpts
 if    "%~1" EQU "-h" goto Help
 if /I "%~1" EQU "-x86" (set BUILDX86=1) && shift && goto CheckOpts
