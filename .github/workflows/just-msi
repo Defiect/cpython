@@ -1,0 +1,15 @@
+name: Just MSI
+
+on:
+  workflow_dispatch:
+    inputs:
+      arch:
+        description: CPU architecture (e.g., x64, x86, arm64)
+        required: true
+        default: x64
+
+jobs:
+  build-msi:
+    uses: ./.github/workflows/reusable-windows-msi.yml
+    with:
+      arch: ${{ github.event.inputs.arch }}
